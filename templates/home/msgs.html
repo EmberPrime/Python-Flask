@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+	a{text-decoration:none;}
+	*{margin: 0;padding: 0;}
+	li{list-style: none;}
+	.content{
+		height: 1900px;
+		/*background:url(../static/img/bg2.jpg);*/
+	    background-repeat:no-repeat;
+	    background-size:100% ;
+	}
+</style>
+<body>
+{% include "head.html" %}
+
+<div class="content">
+	<div class="container">
+	   <div class="row" >
+	      <div class="col-md-3">
+	      	{% include "home/leftmenu.html" %}
+	      </div>
+	      <!-- 右边的内容 -->
+	      <div class="col-md-9">
+	        <div>	
+				<table class="table">
+				  <thead>
+				    <tr>
+				      <th>发送者</th>
+				      <th>消息</th>
+				      <th>发送时间</th>
+				      <th>操作</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    {% for item in msglist %}
+				    <tr>
+				    	<td>{{item.sendname}}</td>
+				    	<td><li>{{item.msg}}</li></td>
+				    	<td>{{item.createtime}}</td>
+				    	<td>查看</td>
+				    </tr>
+					{% endfor %}
+				  </tbody>
+				</table>
+			</div>	
+	      </div>      
+	   </div> 
+	</div>
+</div>
+
+
+
+</body>
+</html>

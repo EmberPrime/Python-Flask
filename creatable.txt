@@ -1,0 +1,14 @@
+
+创建唯一键索引
+db.users.ensureIndex({"uname":1},{"unique":true,"name":"unameuiq"})
+db.users.ensureIndex({"email":1},{"unique":true,"name":"emailuiq"})
+db.users.ensureIndex({"tel":1},{"unique":true,"name":"teluiq"})
+
+
+use finger
+db.admins.insert({'email':'admin','pwd':'admin',role:0})
+
+
+店铺流水id表
+shopflow
+db.shopflow.insert({'flowid':0})

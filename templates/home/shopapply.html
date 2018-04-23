@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>彩虹六号，激情反恐</title>
+</head>
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+	a{text-decoration:none;}
+	*{margin: 0;padding: 0;}
+	li{list-style: none;}
+	.content{
+		height: 1900px;
+		/*background:url(../static/img/bg2.jpg);*/
+	    background-repeat:no-repeat;
+	    background-size:100% ;
+	    background-color: #B4BEE4;
+	    /*background-origin:content-box;*/
+	}
+</style>
+<script type="text/javascript">
+	function locationMap(){
+		$('#map').show();
+		$('#shopform').hide();
+	}
+	function back(){
+		$('#shopform').show();
+		$('#map').hide();
+	}
+	 // $(function (){
+  //     $("[data-toggle='popover']").popover();
+  //   });
+  	// function onsub(){
+  	// 	arr1 = ['shopname','address','lng','tel','idcard','ownercard','blicense','hlicense'];
+  	// 	arr2 = ['店铺名称','店铺地址','经纬度','联系电话','身份证照片','手持身份证照片','营业执照照片','卫生许可证照片']
+  	// 	len = arr1.length;
+  	// 	for(i=0;i<len;i++){
+  	// 		if(shopform[arr1[i]].value==''){
+  	// 			alert('请填写'+arr2[i]);
+  	// 			shopform[arr1[i]].focus();
+  	// 			return false;
+  	// 		}
+  	// 	}
+  	// 	return true;
+  	// }
+</script>
+<body>
+	{% include "head.html" %}
+
+	<div class="content">
+		<div class="container">
+		   <div class="row" >
+		      <div class="col-md-3">
+		      	{% include "home/leftmenu.html" %}
+		      </div>
+		      <div class="col-md-6">
+		        <div>
+<!--  -->
+		        	<form role="form" id='shopform' method="post" action="./subapply"  enctype="multipart/form-data" onsubmit="return onsub();"> <!-- enctype 属性规定在发送到服务器之前应该如何对表单数据进行编码。在此为二进制 -->
+		        		<!-- onsubmi后有return代表的是 如果结果是 true就执行 false就不执行 -->
+						<div class="form-group">
+							<label for="name">店名</label>
+							<input type="text" class="form-control" id="name" name="shopname" placeholder="请输入名称">
+						</div>
+						<div class="form-group">
+							<label for="name">地址</label>
+							<input type="text" class="form-control" id="name" name="address" placeholder="请输入地址">
+						</div>
+						<button type="button" class="btn btn-primary" onclick="locationMap()">定位到店铺地址</button>
+						<div style="margin-top: 5px">
+							经度：<input type="text" name="lng" readonly="true">
+							纬度：<input type="text" name="lat" readonly="true">
+						</div>
+						<div class="form-group">
+							<label for="name">联系电话</label>
+							<input type="text" class="form-control" name="tel" placeholder="请输入手机号码">
+						</div>
+						
+
+						<div class="form-group">
+							<label for="inputfile">身份证上传</label>
+							<input type="file" id="inputfile" name='idcard'>
+						</div>
+						<div class="form-group">
+							<label for="inputfile">手持身份证上传</label>
+							<input type="file" id="inputfile" name='ownercard'>
+						</div>
+						<div class="form-group">
+							<label for="inputfile">营业执照上传</label>
+							<input type="file" id="inputfile" name='blicense'>
+						</div>
+						<div class="form-group">
+							<label for="inputfile">卫生许可证上传</label>
+							<input type="file" id="inputfile" name='hlicense'>
+						</div>
+						<div class="checkbox">
+							<label>
+							<input type="checkbox"><small><a href="#" data-container="body" data-toggle="popover" data-placement="right">同意许可协议</a></small>
+							</label>
+						</div>
+						<button type="submit" class="btn btn-default">提交</button>
+					</form>
+					<div id='map' style='position: absolute;left:0px;top:0px;display:none'>
+					  {% include "home/map.html"%}
+					</div>    	
+		        </div>
+		      </div>      
+		   </div> 
+		</div>
+	</div>
+
+</body>
+</html>

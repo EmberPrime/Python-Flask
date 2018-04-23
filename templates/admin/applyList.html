@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>管理员</title>
+</head>
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<body>
+	{% include "admin/adminHead.html" %}
+	<div class="container">
+	   <div class="row" >
+	      <div class="col-md-3">
+	      	{% include "admin/adminMenu.html" %}
+	      </div>
+	      <div class="col-md-9">
+	      	<table class="table table-striped">
+			  <thead>
+			    <tr>
+			      <th>餐厅名称</th>
+			      <th>餐厅地址</th>
+			      <th>联系电话</th>
+			      <th>操作</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				{% for item in applist %}
+			    <tr>
+			      <td>{{item.shopname}}</td>
+			      <td>{{item.address}}</td>
+			      <td>{{item.tel}}</td>   
+			      <td><a href="shopinfo?shopid={{item._id}}">查看</a></td>
+			    </tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+
+	      </div>      
+	   </div> 
+	</div>
+</body>
+</html>

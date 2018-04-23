@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>彩虹六号，激情反恐</title>
+</head>
+			<!-- BS3 --> 
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+	.content{
+		height: 1900px;
+		background:#00334A url({{loginbean.bgimg}}) no-repeat 40% 0 fixed;
+	    /*background-repeat:no-repeat;*/
+	    /*background-size:100% 100% ;*/
+	    /*background-attachment: fixed;*/
+	}
+
+</style>
+<body>
+	{% include "head.html" %}
+	<div class="content" >
+		<div class="container">
+		   <div class="row">
+		      <div class="col-md-3">
+		      	<!-- 这里是首页左边栏 -->
+		      	<ul class="nav nav-pills nav-stacked">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">SVN</a></li>
+					<li><a href="#">iOS</a></li>
+					<li><a href="#">VB.Net</a></li>
+					<li><a href="#">Java</a></li>
+					<li><a href="#">PHP</a></li>
+				</ul>
+		      </div>
+		      <div class="col-md-9">{% include "picsMove.html" %}</div>      
+		   </div>
+		</div>
+	</div>
+
+		<!-- 模态框（Modal） -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<!-- 这里是登录注册表单 -->
+					<ul id="myTab" class="nav nav-tabs">
+						<li class="active"><a href="#loginForm" data-toggle="tab">登录</a></li>
+						<li><a href="#registerForm" data-toggle="tab">注册</a></li>
+					</ul>
+					{% include "login.html" %}
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+	</div>
+</body>
+</html>
+

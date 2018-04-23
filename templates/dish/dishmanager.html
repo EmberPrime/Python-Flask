@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+	a{text-decoration:none;}
+	*{margin: 0;padding: 0;}
+	li{list-style: none;}
+	.content{
+		height: 1900px;
+		/*background:url(../static/img/bg2.jpg);*/
+	    background-repeat:no-repeat;
+	    background-size:100% ;
+	    background-color: #B4BEE4;
+	}
+</style>
+<body>
+{% include "head.html" %}
+
+<div class="content">
+	<div class="container">
+	   <div class="row" >
+	      <div class="col-md-3">
+	      	{% include "home/leftmenu.html" %}
+	      </div>
+	      <div class="col-md-9">
+	      	 {% include "dish/adddish.html" %}
+	      </div>      
+	   </div> 
+	</div>
+</div>
+
+</body>
+</html>

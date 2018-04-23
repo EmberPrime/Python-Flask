@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>管理员</title>
+</head>
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+	function agree(){
+		if(confirm('确定通过此餐厅的审核？'))
+			location.href = 'agreeShopApply?shopid={{shopinfo._id}}&uid={{shopinfo.uid}}';
+	}
+	function refuse(){
+		if(confirm('确定驳回此餐厅的审核？'))
+			alert('审核驳回');
+	}
+	function subRefuse(){
+		refuseForm.submit();
+	}
+	
+</script>
+<body>
+	{% include "admin/adminHead.html" %}
+	<div class="container">
+	   <div class="row" >
+	      <div class="col-md-3">
+	      	{% include "admin/adminMenu.html" %}
+	      </div>
+	      <div class="col-md-9">
+	      	<table width="100%" class="table table-bordered">
+	      		<tr>
+	      			<td>餐厅名称</td>
+	      			<td>{{shopinfo.shopname}}</td>
+	      			<td>联系电话</td>
+	      			<td>{{shopinfo.tel}}</td>
+	      		</tr>
+	      		<tr>
+	      			<td>地址</td>
+	      			<td colspan="4">{{shopinfo.address}}</td>
+	      			
+	      		</tr>
+	      		<tr>
+	      			<td>身份证</td>
+	      			<td colspan="4"><img src="{{shopinfo.idcard}}"></td>
+	      		</tr>
+	      		<tr>
+	      			<td>手持身份证</td>
+	      			<td colspan="4"><img src="{{shopinfo.ownercard}}"></td>
+	      		</tr>
+	      		<tr>
+	      			<td>营业执照照片</td>
+	      			<td colspan="4"><img src="{{shopinfo.blicense}}"></td>
+	      		</tr>
+	      		<tr>
+	      			<td>卫生许可证</td>
+	      			<td colspan="4"><img src="{{shopinfo.hlicense}}"></td>
+	      		</tr>
+	      	</table>
+	      		<!-- <button >通过</button> -->
+	      		<button class="btn btn-primary" onclick="agree()">通过</button>
+	      		<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">驳回</button>
+	      </div>      
+	   </div> 
+	</div>
+</body>
+</html>
+
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<form role="form" method="post" action="/refuseShopApply" name="refuseForm">
+				  <div class="form-group">
+				    <label for="name">文本框</label>
+				    <input type="hidden" name="">
+				    <textarea class="form-control" rows="3" name="msg"></textarea>
+				    <input type="hidden" name="shopid" value="{{shopinfo._id}}"> 
+				    <input type="hidden" name="uid" value="{{shopinfo.uid}}"> 
+				  </div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" onclick="subRefuse()">
+					驳回
+				</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>

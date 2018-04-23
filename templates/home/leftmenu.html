@@ -1,0 +1,36 @@
+
+<ul class="nav nav-pills nav-stacked">
+	<li class="active"><a href="/home">导航</a></li>
+	<li><a href="/home">个人空间</a></li>
+	{% if loginbean.role==1%}
+	<li><a href="/shopapply">商家申请</a></li>
+	{% elif loginbean.role==2 %}
+	<li><a href="#">商家审核中</a></li>
+	{% elif loginbean.role==3 %}
+	<li><a class="myshop" href="#">我的商店</a>
+		<ul class="nav nav-pills select">
+			<li><a href="#">当前菜单</a></li>
+			<li><a href="/menumanger">菜单管理</a></li>
+		</ul>
+	</li>	
+	{% elif loginbean.role==0 %}
+	<li><a href="/shopapply">再次申请</a></li>
+	{% endif %}
+	<li><a href="/myMsg">我的消息</a></li>
+	<li><a href="#">我的收藏</a></li>
+</ul>
+<style type="text/css">
+	.nav-stacked{
+		width: 70%;
+	}
+	.select li a{
+		font-size: 18px;
+		text-align:right;
+	}
+	.nav-stacked li{
+		width: 100%;
+		font-size: 20px;
+		text-align:center;
+		border-radius: 10px;
+	}
+</style>

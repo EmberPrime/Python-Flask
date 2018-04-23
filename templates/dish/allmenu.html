@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+	a{text-decoration:none;}
+	*{margin: 0;padding: 0;}
+	li{list-style: none;}
+	.content{
+		height: 1900px;
+		/*background:url(../static/img/bg2.jpg);*/
+	    background-repeat:no-repeat;
+	    background-size:100% ;
+	}
+	.dishlist{
+		width: 230px;
+		height: 330px;
+		border: 1px solid #a2a2a2;
+	}
+	.dishpic{
+		display:block;
+		width: 200px;
+		height: 200px;
+		margin: 10px auto;
+	}
+	.dishname,.price{
+		font-size: 18px;
+		display: block;
+		margin:0 auto;
+	}
+</style>
+<script>
+	function delectdish(){
+		if(confirm('确定删除此菜品？'))
+			alert('为了您的数据安全，此功能目前并未开放')
+	}
+</script>
+<body>
+{% include "head.html" %}
+
+<div class="content">
+	<div class="container">
+	   <div class="row" >
+	      <div class="col-md-3">
+	      	{% include "home/leftmenu.html" %}
+	      </div>
+	      <div class="col-md-9">
+			{% for dishrs in dish %}
+			<div class="dishlist" style="float: left; margin-right: 5px;">
+				<img src="{{dishrs.dishphoto}}" class="dishpic">
+				<ul>
+					<li class="dishname">名称：{{dishrs.dishname}}</li>
+					<li class="price">价格：{{dishrs.price}}元</li>
+				</ul>
+				<button type="button" class="btn btn-danger"  onclick="delectdish()" style="margin-left:40%; ">删除</button>
+			</div>
+			{% endfor %}
+	      </div>      
+	   </div> 
+	</div>
+</div>
+</body>
+</html>
+
+
+

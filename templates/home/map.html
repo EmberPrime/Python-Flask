@@ -1,0 +1,135 @@
+<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+  <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=973ff4275eaf1fb1ba1292a967ba116b"></script>
+  <script>
+	var map,geolocation;
+	var placeSearch=null;
+	var marker = null; //定义一个气泡
+	window.onload=function(){
+		map = new AMap.Map('mapContainer', {
+			zoom:17,
+		});
+		map.plugin('AMap.Geolocation', function() {
+			geolocation = new AMap.Geolocation({
+			});
+			AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+			AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+			geolocation.getCurrentPosition();
+		})
+		AMap.event.addListener(map,'click',dianMap);
+	}
+	function dianMap(e){
+		lng = e.lnglat.lng;
+		lat = e.lnglat.lat;
+		if(marker != null){
+			marker.setPosition(new AMap.LngLat(lng,lat));
+		}else{
+			marker = new AMap.Marker({
+				position:[lng,lat],
+				map:map,
+				icon:"/static/img/mark_r.png",
+			});
+		}
+			//写入表单
+		shopform.lng.value = lng;
+		shopform.lat.value = lat;
+	}
+	function onComplete(data){
+		lng = data.position.getLng();
+		lat = data.position.getLat();
+		map.setCenter([lng,lat]);
+	}
+	function onError(data){
+		map.setZoom(6);
+	}
+	function searchSub(page){
+		searchKey = document.getElementById('searchKey');
+		searchStr = searchKey.value;
+		searchRs(searchStr,page);
+	}
+	function searchRs(searchStr,page){
+		AMap.service('AMap.PlaceSearch',function(){//回调函数
+			placeSearch= new AMap.PlaceSearch({
+				pageIndex:page
+			});
+			placeSearch.search(searchStr,function(status, result){
+				console.log(status);
+				if(status=='complete'){
+					$('#searchList').html('');
+					$('#searchList').show();
+					rs = result.poiList.pois;
+					len = rs.length;
+					ul = document.createElement('ul');
+					for(i=0;i<len;i++){
+						li = document.createElement('li');
+						li.innerHTML="<a href='javascript:void'>"+rs[i].name+"</a>";
+						ul.appendChild(li);
+					}
+					$('#searchList').append(ul);
+					count = result.poiList.count;
+					pageSize = result.poiList.pageSize;
+					pageNum = Math.ceil(count/pageSize);
+					div = document.createElement('div');
+					div.style='width:126px;word-wrap:break-word;';
+					for(i=1;i<=pageNum;i++){
+						if(i!=page){
+							a = "<a href='javascript:void' onclick='searchSub("+i+")'>"+i+"</a>";
+						}else{
+							a = "<a href='javascript:void' onclick='searchSub("+i+")'><font color='red'>"+i+"</font></a>";
+						}
+						$(div).append('&nbsp;');
+						$(div).append(a);
+					}
+					$('#searchList').append(div);
+					
+					/*
+					for(key in result.info){
+						console.log(key);
+					}
+					*/
+					// console.log(result.poiList.count);
+					// console.log(result.poiList.pois);
+					// console.log(result.poiList.pageIndex);
+					// console.log(result.poiList.pageSize);
+					
+				}else if(status=='no_data'){
+					$('#searchList').hide();
+					alert('未能搜索到相关地址');
+				}
+			})
+		})
+	}
+  </script>
+  <style>
+		/*body{
+			height:600px;
+			}*/
+		#mapContainer{
+			height:540px;
+			width:800px;
+			border:1px solid blue
+			}
+	</style>
+	<div style="background: #ffffff;">
+		<table width="100%">
+			<tr>
+				<td>
+					<input type='text' id='searchKey' class="form-control"/>
+				</td>
+				<td>
+					<input type='button' class="btn btn-default" value='搜' onclick='searchSub(1)'/>
+				</td>
+				<td align='right'>
+					<button type="button" class="btn btn-danger" onclick='back()'>返回</button>
+				</td>
+			</tr>
+		</table>
+
+		<div class='row'>
+			<div id='searchList' class='col-md-3' style='display: none;'>
+				
+			</div>
+			<div class='col-md-9'>
+				<div id="mapContainer"></div>
+			</div>
+		</div>
+	</div>

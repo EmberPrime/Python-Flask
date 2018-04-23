@@ -1,0 +1,57 @@
+ <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<nav class="navbar navbar-default navbar-fixed-top" role="navigation"> 
+					    <div class="container-fluid"> 
+						    <div class="navbar-header"> 
+						        <a class="navbar-brand" href="/">首页</a> 
+						    </div> 
+						    <div> 
+						        <ul class="nav navbar-nav"> 
+						            <li class="active"><a href="/admin">管理员</a></li> 
+						            <li><a href="/setting">设置</a></li>
+						            {% if loginbean is undefined or loginbean==None%}
+						            <li style="position: absolute;left:90%;top: 20%;"><button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" >登录/注册</button></li>
+
+									{% else %} 
+						            <li class="dropdown" style="position: absolute;left:80%;">
+						            	<img class="headimg" src={{loginbean.headImg}} style="border-radius: 50%" >
+						                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+						                    你好，{{loginbean.nickname}} <b class="caret"></b> 
+						                </a> 
+						                
+						                <ul class="dropdown-menu"> 
+						                    <li><a href="/home">个人主页</a></li> 
+						                    <li><a href="/setting">设置</a></li> 
+						                    <li><a href="/logout">注销</a></li> 
+						                </ul> 
+						            </li> 
+						            {% endif %}
+						        </ul> 
+						    </div> 
+					    </div> 
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+ 
+<style type="text/css">
+	.navbar-fixed-top{
+		position: relative;
+		margin-bottom: 0px;
+	}
+	.headimg{
+		width:50px;
+		height: 50px;
+		position: absolute;
+		top:0px;
+		left: -50px;
+	}
+</style>
+
+

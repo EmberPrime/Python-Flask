@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+	a{text-decoration:none;}
+	*{margin: 0;padding: 0;}
+	li{list-style: none;}
+
+	#content{
+		height: 1900px;
+		/*background:url(../static/img/bg2.jpg);*/
+	    background-repeat:no-repeat;
+	    background-size:100% ;
+	    background-color: #B4BEE4;
+	}
+	img{
+		display: inline-block;
+		width: 300px;
+		height: 168px;
+	}
+	
+</style>
+<!-- <script type="text/javascript">
+	function BGM() {
+		document.getElementById("content").style.background="url('../../static/bg/1.jpg')";
+	}
+
+</script> -->
+<body>
+{% include "head.html" %}
+
+<div id="content">
+	<div class="container">
+	   <div class="row" >
+	      <div class="col-md-3">
+	      {% include "home/leftmenu.html" %}
+	      </div>
+	      <div class="col-md-9">
+	      	<!-- 选择背景 -->
+	      	<label for="name">选择你喜欢背景</label>
+	      	<form name="bgForm" action="./changeBG" method="get">
+	      		<div>
+					<label class="radio-inline">
+						<img src="/static/bg/1.jpg"><br>
+						<input type="radio" name="bg" value="1" checked> 选项 1
+					</label>
+					<label class="radio-inline">
+						<img src="/static/bg/2.jpg"><br>
+						<input type="radio" name="bg"  value="2"> 选项 2
+					</label>
+					<label class="radio-inline">
+						<img src="/static/bg/3.jpg"><br>
+						<input type="radio" name="bg" value="3"> 选项 3
+					</label>
+					<label class="radio-inline">
+						<img src="/static/bg/4.png"><br>
+						<input type="radio" name="bg" value="4"> 选项 4
+					</label>
+					<label class="radio-inline">
+						<img src="/static/bg/5.jpg"><br>
+						<input type="radio" name="bg" value="5"> 选项 5
+					</label>
+				</div>
+	      		<button type="submit" class="btn btn-primary">提交</button>
+			</form>
+			<!-- 更改昵称 -->
+			<form name="reNickname" action="./changeNickname" method="get">
+				<div class="form-group">
+					<label class="col-sm-2 control-label" style="margin-top: 5px">更改昵称</label>
+					<div class="col-sm-4" style="margin-left: -50px">
+						<input type="text" class="form-control" placeholder="请输入昵称" name="Nickname">
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">提交</button>
+			</form>
+			<!-- 上传头像 -->
+			<div style="margin-top:60px ">
+				<form action="./changeHeadImg" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="inputfile" style="display: block;">上传头像</label>
+						<img src="{{loginbean.headImg}}" style="height: 150px;width: 150px;">
+						<img src="{{loginbean.headImg}}" style="height: 100px;width: 100px;">
+						<img src="{{loginbean.headImg}}" style="height: 50px;width: 50px;">
+						<input type="file" id="inputfile" name='headImg' style="margin-top:10px;" >
+					</div>
+					<button type="submit" class="btn btn-primary">提交</button>
+				</form>
+			</div>
+
+			<!-- 上传背景图片 -->
+			<div style="margin-top:60px ">
+				<form action="./changebgimg" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label for="inputfile" style="display: block;">当前背景</label>
+						<img src="{{loginbean.bgimg}}" style="height: 168px;width: 300px;">
+						<input type="file" id="inputfile" name='bgimg' style="margin-top:10px;" >
+					</div>
+					<button type="submit" class="btn btn-primary">提交</button>
+				</form>
+			</div>
+	      </div>      
+	   </div> 
+	</div>
+</div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+  <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.3&key=973ff4275eaf1fb1ba1292a967ba116b"></script>
+  <script>
+	var map,geolocation;
+	var placeSearch=null;
+	window.onload=function(){
+		map = new AMap.Map('mapContainer', {
+			zoom:17,
+		});
+		map.plugin('AMap.Geolocation', function() {
+			geolocation = new AMap.Geolocation({
+			});
+			AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+			AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+			geolocation.getCurrentPosition();
+		})
+	}
+	function onComplete(data){
+		lng = data.position.getLng();
+		lat = data.position.getLat();
+		map.setCenter([lng,lat]);
+	}
+	function onError(data){
+		map.setZoom(6);
+	}
+	function search(){
+		AMap.service('AMap.PlaceSearch',function(){//回调函数
+			placeSearch= new AMap.PlaceSearch({
+				pageIndex:2
+			});
+			placeSearch.search('房山',function(status, result){
+				if(status=='complete'){
+					/*
+					for(key in result.info){
+						console.log(key);
+					}
+					*/
+					console.log(result.poiList.count);
+					console.log(result.poiList.pois);
+					console.log(result.poiList.pageIndex);
+					console.log(result.poiList.pageSize);
+					
+				}
+			})
+		})
+	}
+  </script>
+  <style>
+		body{
+			height:600px;
+			}
+		#mapContainer{
+			height:100%;
+			width:100%;
+			border:1px solid blue
+			}
+	</style>
+ </head>
+ <body>
+	<input type='text' name='searchkey'/><input type='button' value='搜' onclick='search()'/>
+	<div id="mapContainer"></div>
+ </body>
+ 

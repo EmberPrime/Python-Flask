@@ -1,0 +1,122 @@
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">创建类别</button>
+
+<!-- <div class="btn-group">
+	<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">当前类别 <span class="caret"></span></button>
+	<ul class="dropdown-menu" role="menu">
+		{% for item in dishs %}
+		<li><a href="#">{{item.category}}</a></li>
+		{% endfor %}
+	</ul>
+</div> -->
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>种类</th>
+			<th>操作</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+	<tbody> <!-- 下面的dishs菜的种类的集合 -->
+		{% for item in dishs %}
+		<tr>
+			<td>{{item.category}}</td>
+			<td>
+				<a href="javascript:void" onclick="updateshow(this,'{{item._id}}')">修改</a>
+				<button type="button" class="btn btn-danger"  onclick="delect()">删除</button>
+			</td>
+			<td><a href="/menu?sortid={{item._id}}">查看菜品</a></td>
+
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal3" style="margin-bottom: 10px">添加菜品</button>
+<script>
+	function delect(){
+		if(confirm('确定删除此种类？'))
+			alert('为了您的数据安全，此功能目前并未开放')
+	}
+	function updateshow(thisa,sortid){
+		upSortForm.sortid.value = sortid;
+		$('#myModal2').modal('show');
+	}
+</script>
+	
+
+
+<!-- 创建菜类名 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<form class="form-horizontal" role="form" method="POST" action="/addSort">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">菜品类别</label>
+						<div class="col-sm-10">
+							<input type="hidden" class="form-control"  name="shopid" value="{{shopid}}">
+							<input type="text" class="form-control"  placeholder = '比如凉菜类、主食类、汤菜类等' name="dishclass">
+						</div>
+					</div>
+					<div style="text-align: center;">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>&nbsp;&nbsp;
+						<button type="submit" class="btn btn-primary">创建</button>
+					</div>
+				</form>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+</div>
+
+
+<!-- 修改菜类名 -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<form class="form-horizontal" name="upSortForm" method="POST" action="updateSort">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">新类名</label>
+						<div class="col-sm-10">
+							<input type="hidden" class="form-control"  name="shopid" value="{{shopid}}">
+							<input type="hidden" class="form-control"  name="sortid">
+							<input type="text" class="form-control"  placeholder = '请输入新的菜的种类名称' name="newSortname">
+						</div>
+					</div>
+					<div style="text-align: center;">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>&nbsp;&nbsp;
+						<button type="submit" class="btn btn-success">提交</button>
+					</div>
+				</form>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+</div>
+
+<!-- 添加菜名 -->
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" style='width:720px;'>
+            <div class="modal-header">
+				创建菜品
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" style='text-align: center'>
+				<form method="post" action='addtoSort' enctype="multipart/form-data">
+					菜品名称:<input type='text' name='dishname' class="form-control"/><br/>
+					菜品价格:<input type='text' name='price' class="form-control"/><br/>
+					<input type='file' name='dishphoto'/><br/>
+					<select class="form-control" name='sortid'>
+						{% for item in dishs %}
+						<option value='{{item._id}}'>{{item.category}}</option>
+						{% endfor %}
+					</select>
+					{% for dishrs in dishs %}
+					<input type='hidden' name='shopid' value='{{dishrs.shopid}}'/>
+					{% endfor %}
+					<button type="submit" class="btn btn-primary" style="margin-top: 10px">创建</button>
+				</form>
+			</div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

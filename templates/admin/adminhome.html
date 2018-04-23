@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>管理员</title>
+</head>
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+	body{
+		background-color: #B4BEE4;
+	}
+</style>
+<body>
+	{% include "admin/adminHead.html" %}
+
+	
+	<div class="container">
+	   <div class="row" >
+	      <div class="col-md-3">
+	      	{% include "admin/adminMenu.html" %}
+	      </div>
+	      <div class="col-md-9">
+	        这里是刚进入个人空间显示的画面
+	         
+	      </div>      
+	   </div> 
+	</div>
+	
+</body>
+</html>
